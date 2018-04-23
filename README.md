@@ -57,7 +57,7 @@ The table shows same as the results in paper:
       <td></td>
    </tr>
    <tr>
-      <td>\gamma</td>
+      <td>![equation](https://latex.codecogs.com/gif.latex?%5Cgamma)</td>
       <td>Methods</td>
       <td>NMSE</td>
       <td>\rho</td>
