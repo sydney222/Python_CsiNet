@@ -5,10 +5,11 @@
 This repository contains the original models described in the paper "Deep Learning for Massive MIMO CSI Feedback" (https://ieeexplore.ieee.org/document/8322184/).
 
 
-## Environment
+## Requirements
 - Python 3.5(or 3.6)
-- Keras
-- TensorFlow as a backend of Keras (1.7.0)
+- Keras (>=2.1.1)
+- Tensorflow (>=1.4)
+- Numpy
 
 ## Steps to start
 
