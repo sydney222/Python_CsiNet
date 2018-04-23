@@ -6,7 +6,7 @@ This repository contains the original models described in the paper "Deep Learni
 
 
 ## Requirements
-- Python 3.5(or 3.6)
+- Python 3.5 (or 3.6)
 - Keras (>=2.1.1)
 - Tensorflow (>=1.4)
 - Numpy
