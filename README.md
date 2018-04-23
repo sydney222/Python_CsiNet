@@ -23,7 +23,7 @@ If you use these models in your research, please cite:
 
 ### Step1. Download the Model
 There are two models in the paper:
-- CsiNet: An antoencoder for reconstruct the CSI
+- CsiNet: **CSI** sensing (or encoder) and recovery (or decoder) **net**work
 - CS-CsiNet: Only learns to recover CSI from CS random linear measurements
 
 We also provide two types of code:
