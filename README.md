@@ -57,12 +57,12 @@ The table shows same as the results in paper:
       <td></td>
    </tr>
    <tr>
-      <td>![equation](https://latex.codecogs.com/gif.latex?%5Cgamma)</td>
+      <td>gamma</td>
       <td>Methods</td>
       <td>NMSE</td>
-      <td>\rho</td>
+      <td>rho</td>
       <td>NSME</td>
-      <td>\rho</td>
+      <td>rho</td>
    </tr>
    <tr>
       <td>1/4</td>
