@@ -1,9 +1,9 @@
 # Python code for "Deep Learning for Massive MIMO CSI Feedback"
 (c) 2018 Wang-Ting Shih and Chao-Kai Wen e-mail: sydney2317076@gmail.com and chaokai.wen@mail.nsysu.edu.tw
 
-## Introdution
-This repository contains the original models described in the paper "Deep Learning for Massive MIMO CSI Feedback" (https://ieeexplore.ieee.org/document/8322184/).
-
+## Introduction
+This repository contains the original models described in 
+Chao-Kai Wen, Wan-Ting Shih, and Shi Jin, “Deep learning for massive MIMO CSI feedback,” IEEE Wireless Communications Letters, 2018. [Online]. Available: https://ieeexplore.ieee.org/document/8322184/
 
 ## Requirements
 - Python 3.5 (or 3.6)
@@ -18,9 +18,10 @@ There are two models in the paper:
 - CsiNet: **CSI** sensing (or encoder) and recovery (or decoder) **net**work
 - CS-CsiNet: Only learns to recover CSI from CS random linear measurements
 
-We also provide two types of code:
-- onlytest: Only to reproduce the results which provide in the paper. Also, we provide the model and weight which we have trained in the folder called 'saved_model'.
-- train: Training by yourself
+We provide two types of code:
+- xxx_onlytest: This type of code is used to reproduce the results in our paper based on our training weights. The model and weights we trained are put in folder 'saved_model'.
+- xxx_train: This type of code provide a procedure to train the weights yourself.
+
 
 ### Step2. Data Preparation
 Download the data from https://drive.google.com/drive/folders/1_lAMLk_5k1Z8zJQlTr5NRnSD6ACaNRtj?usp=sharing. After you got the data, put the data as shown below.
@@ -34,10 +35,10 @@ data/
 ```
 
 ### Step3. Run the file
-Now, you are ready to run any *.py to get the result.
+Now, you are ready to run any *.py to get the results (i.e., CS-CsiNet and CsiNet in Table I of our paper).
 
 ## Result
-The table shows same as the results in paper:
+The following results are reproduced from Table I of our paper:
 
 |   gamma  |  Methods  | Indoor |            | Outdoor |        |
 |:--------:|:---------:|:------:|:----------:|:-------:|:------:|
