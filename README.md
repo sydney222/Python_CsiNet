@@ -4,16 +4,7 @@
 ## Introdution
 This repository contains the original models described in the paper "Deep Learning for Massive MIMO CSI Feedback" (https://ieeexplore.ieee.org/document/8322184/).
 
-## Citation
 
-If you use these models in your research, please cite:
-
-	@article{He2015,
-		author = {Kaiming He and Xiangyu Zhang and Shaoqing Ren and Jian Sun},
-		title = {Deep Residual Learning for Image Recognition},
-		journal = {arXiv preprint arXiv:1512.03385},
-		year = {2015}
-	}
 ## Environment
 - Python 3.5(or 3.6)
 - Keras
