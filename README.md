@@ -47,181 +47,26 @@ Now, you are ready to run any *.py to get the result.
 ## Result
 The table shows same as the results in paper:
 
-<table>
-   <tr>
-      <td></td>
-      <td></td>
-      <td>Indoor</td>
-      <td></td>
-      <td>Outdoor</td>
-      <td></td>
-   </tr>
-   <tr>
-      <td>gamma</td>
-      <td>Methods</td>
-      <td>NMSE</td>
-      <td>rho</td>
-      <td>NSME</td>
-      <td>rho</td>
-   </tr>
-   <tr>
-      <td>1/4</td>
-      <td>LASSO</td>
-      <td>-7.59</td>
-      <td>0.91</td>
-      <td>-5.08</td>
-      <td>0.82</td>
-   </tr>
-   <tr>
-      <td></td>
-      <td>BM3D-AMP</td>
-      <td>-4.33</td>
-      <td>0.80</td>
-      <td>-1.33</td>
-      <td>0.52</td>
-   </tr>
-   <tr>
-      <td></td>
-      <td>TVAL3</td>
-      <td>-14.87</td>
-      <td>0.97</td>
-      <td>-6.90</td>
-      <td>0.88</td>
-   </tr>
-   <tr>
-      <td></td>
-      <td>CS-CsiNet</td>
-      <td>-11.82</td>
-      <td>0.96</td>
-      <td>-6.69</td>
-      <td>0.87</td>
-   </tr>
-   <tr>
-      <td></td>
-      <td>CsiNet</td>
-      <td>-17.36</td>
-      <td>0.99</td>
-      <td>-8.75</td>
-      <td>0.91</td>
-   </tr>
-   <tr>
-      <td>1/16</td>
-      <td>LASSO</td>
-      <td>-2.72</td>
-      <td>0.70</td>
-      <td>-1.01</td>
-      <td>0.46</td>
-   </tr>
-   <tr>
-      <td></td>
-      <td>BM3D-AMP</td>
-      <td>0.26</td>
-      <td>0.16</td>
-      <td>0.55</td>
-      <td>0.11</td>
-   </tr>
-   <tr>
-      <td></td>
-      <td>TVAL3</td>
-      <td>-2.61</td>
-      <td>0.66</td>
-      <td>-0.43</td>
-      <td>0.45</td>
-   </tr>
-   <tr>
-      <td></td>
-      <td>CS-CsiNet</td>
-      <td>-6.09</td>
-      <td>0.87</td>
-      <td>-2.51</td>
-      <td>0.66</td>
-   </tr>
-   <tr>
-      <td></td>
-      <td>CsiNet</td>
-      <td>-8.65</td>
-      <td>0.93</td>
-      <td>-4.51</td>
-      <td>0.79</td>
-   </tr>
-   <tr>
-      <td>1/32</td>
-      <td>LASSO</td>
-      <td>-1.03</td>
-      <td>0.48</td>
-      <td>-0.24</td>
-      <td>0.27</td>
-   </tr>
-   <tr>
-      <td></td>
-      <td>BM3D-AMP</td>
-      <td>24.72</td>
-      <td>0.04</td>
-      <td>22.66</td>
-      <td>0.04</td>
-   </tr>
-   <tr>
-      <td></td>
-      <td>TVAL3</td>
-      <td>-0.27</td>
-      <td>0.33</td>
-      <td>0.46</td>
-      <td>0.28</td>
-   </tr>
-   <tr>
-      <td></td>
-      <td>CS-CsiNet</td>
-      <td>-4.67</td>
-      <td>0.83</td>
-      <td>-0.52</td>
-      <td>0.37</td>
-   </tr>
-   <tr>
-      <td></td>
-      <td>CsiNet</td>
-      <td>-6.24</td>
-      <td>0.89</td>
-      <td>-2.81</td>
-      <td>0.37</td>
-   </tr>
-   <tr>
-      <td>1/64</td>
-      <td>LASSO</td>
-      <td>-0.14</td>
-      <td>0.22</td>
-      <td>-0.06</td>
-      <td>0.12</td>
-   </tr>
-   <tr>
-      <td></td>
-      <td>BM3D-AMP</td>
-      <td>0.22</td>
-      <td>0.04</td>
-      <td>25.45</td>
-      <td>0.03</td>
-   </tr>
-   <tr>
-      <td></td>
-      <td>TVAL3</td>
-      <td>0.63</td>
-      <td>0.11</td>
-      <td>0.76</td>
-      <td>0.19</td>
-   </tr>
-   <tr>
-      <td></td>
-      <td>CS-CsiNet</td>
-      <td>-2.46</td>
-      <td>0.68</td>
-      <td>-0.22</td>
-      <td>0.28</td>
-   </tr>
-   <tr>
-      <td></td>
-      <td>CsiNet</td>
-      <td>-5.84</td>
-      <td>0.87</td>
-      <td>-1.93</td>
-      <td>0.59</td>
-   </tr>
-</table>
+|   gamma  |  Methods  | Indoor |            | Outdoor |        |
+|:--------:|:---------:|:------:|:----------:|:-------:|:------:|
+|          |           |  NMSE  |     rho    |   NSME  |   rho  |
+|    1/4   | LASSO     |  -7.59 |    0.91    |  -5.08  |  0.82  |
+|          | BM3D-AMP  |  -4.33 |     0.8    |  -1.33  |  0.52  |
+|          | TVAL3     | -14.87 |    0.97    |   -6.9  |  0.88  |
+|          | CS-CsiNet | -11.82 |    0.96    |  -6.69  |  0.87  |
+|          | CsiNet    | **-17.36** |   **0.99**   |  **-8.75**  |  **0.91**  |
+|   1/16   | LASSO     |  -2.72 |     0.7    |  -1.01  |  0.46  |
+|          | BM3D-AMP  |  0.26  |    0.16    |   0.55  |  0.11  |
+|          | TVAL3     |  -2.61 |    0.66    |  -0.43  |  0.45  |
+|          | CS-CsiNet |  -6.09 |    0.87    |  -2.51  |  0.66  |
+|          | CsiNet    |  **-8.65** |    **0.93**    |  **-4.51**  |  **0.79**  |
+|   1/32   | LASSO     |  -1.03 |    0.48    |  -0.24  |  0.27  |
+|          | BM3D-AMP  |  24.72 |    0.04    |  22.66  |  0.04  |
+|          | TVAL3     |  -0.27 |    0.33    |   0.46  |  0.28  |
+|          | CS-CsiNet |  -4.67 |    0.83    |  -0.52  |  0.37  |
+|          | CsiNet    |  **-6.24** |    **0.89**    |  **-2.81**  |  **0.37**  |
+|   1/64   | LASSO     |  -0.14 |    0.22    |  -0.06  |  0.12  |
+|          | BM3D-AMP  |  0.22  |    0.04    |  25.45  |  0.03  |
+|          | TVAL3     |  0.63  |    0.11    |   0.76  |  0.19  |
+|          | CS-CsiNet |  -2.46 |    0.68    |  -0.22  |  0.28  |
+|          | CsiNet    |  **-5.84** |    **0.87**    |  **-1.93**  |  **0.59**  |
