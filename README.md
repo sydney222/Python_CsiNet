@@ -63,3 +63,8 @@ The following results are reproduced from Table I of our paper:
 |          | TVAL3     |  0.63  |    0.11    |   0.76  |  0.19  |
 |          | CS-CsiNet |  -2.46 |    0.68    |  -0.22  |  0.28  |
 |          | CsiNet    |  **-5.84** |    **0.87**    |  **-1.93**  |  **0.59**  |
+
+
+## Remarks
+1. The file DATA_HtestFin_all.mat is mainly used to calculate $\rho$. According to the definition in the article, we should use all subcarriers to calculate to get the average. However, due to the limitation of the computer, we only compared the first 125 sub-carriers. In other words, the dimension of the matrix in DATA_HtestFin_all.mat, 4000, is the result of 125 (subcarriers) *32 (antenna).
+2. The source code of the CsiNet-LSTM can be found in the Book "Intelligent communication: physical layer design based on deep learning".
