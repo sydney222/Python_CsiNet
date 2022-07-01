@@ -24,7 +24,7 @@ We provide two types of code:
 
 
 ### Step2. Data Preparation
-Download the data from https://drive.google.com/drive/folders/10my4aINYUoxSK_1ZFuDgFOo1JgyN0lWT?usp=sharing. After you got the data, put the data as shown below.
+Download the data from https://www.dropbox.com/sh/edla5dodnn2ocwi/AADtPCCALXPOsOwYi_rjv3bda?dl=0. After you got the data, put the data as shown below.
 ```
 *.py
 saved_model/
