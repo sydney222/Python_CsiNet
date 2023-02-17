@@ -17,7 +17,7 @@ Python:
 - Tensorflow (>=2.5.3)
 
 MATLAB:
-- [MATLAB](https://www.mathworks.com/products/matlab.html) R2022b
+- [MATLAB](https://www.mathworks.com/products/matlab.html) R2022b or later
 - [Deep Learning Toolbox&trade;](https://www.mathworks.com/products/deep-learning.html)
 
 ## Reproduction steps
