@@ -28,7 +28,6 @@ load(fullfile("data","DATA_Hval"+extractBefore(environment,"door")+".mat"));
 sampleSize = length(HT);
 xVal = reshape(HT', maxDelay, nTx, numChannels, sampleSize);
 xVal = permute(xVal, [2, 1, 3, 4]); % permute xTrain to nTx-by-maxDelay-by-numChannels-by-batchSize
-dlxVal = dlarray(xVal, 'SSCB');
 
 %% Set training parameters and train the network
 options = trainingOptions("adam", ...
@@ -39,7 +38,7 @@ options = trainingOptions("adam", ...
     Epsilon=1e-7, ...
     GradientDecayFactor=0.9, ...
     SquaredGradientDecayFactor=0.999, ...
-    MaxEpochs=1500, ...
+    MaxEpochs=2, ...
     MiniBatchSize=500, ...
     Shuffle="every-epoch", ...
     Verbose=true, ...
@@ -63,9 +62,7 @@ testSampleSize = length(HT);
 %%
 xTest = reshape(HT', maxDelay, nTx, numChannels, testSampleSize);
 xTest = permute(xTest, [2, 1, 3, 4]);
-dlxTest = dlarray(xTest, "SSCB");
-dlxHat = predict(CSINet, dlxTest);
-xHat = extractdata(dlxHat);
+xHat = predict(CSINet, xTest);
 
 % Construct complex data from 2-channel input
 xTestr = HT(:, 1:1024);
@@ -98,7 +95,7 @@ meanMSE = real(mean(nmse));
 fprintf("\nAt compression rate 1/%d, nmse is %f\n",1/compressRate, meanMSE);
 
 %% Save trained network
-savedNetFileName = "model_CsiNet_"+environment+"dim_"+num2str(maxDelay*nTx*numChannels*compressRate)+".mat";
+savedNetFileName = "model_CsiNet_"+environment+"_dim"+num2str(maxDelay*nTx*numChannels*compressRate)+".mat";
 save(savedNetFileName, "CSINet")
 
 %% Local functions
@@ -112,74 +109,82 @@ encodedDim = compressRate*numElements;
 autoencoderLGraph = layerGraph([ ...
     % Encoder
     imageInputLayer(inputSize,"Name","Htrunc", ...
-    "Normalization","none","Name","Enc_Input")
+    "Normalization","none","Name","input_1")
 
-    convolution2dLayer([3 3],2,"Padding","same","Name","Enc_Conv")
+    convolution2dLayer([3 3],2,"Padding","same","Name","conv2d")
     batchNormalizationLayer("Epsilon",0.001,"MeanDecay",0.99, ...
-    "VarianceDecay",0.99,"Name","Enc_BN")
-    leakyReluLayer(0.3,"Name","Enc_leakyRelu")
+    "VarianceDecay",0.99,"Name","batch_normalization")
+    leakyReluLayer(0.3,"Name","leaky_re_lu")
 
-    flattenLayer("Name","Enc_flatten")
+    functionLayer(@(x)permute(stripdims(x),[3,2,1,4]), ...
+      "Formattable",true,"Acceleratable",true,"Name","Enc_Permute1")
 
-    fullyConnectedLayer(encodedDim,"Name","Enc_FC")
+    functionLayer(@(x)dlarray(reshape(x,numChannels*nTx*maxDelay,1,1,[]),'CSSB'), ...
+      "Formattable",true,"Acceleratable",true,"Name","Enc_Reshape")
 
-    sigmoidLayer("Name","Enc_Sigmoid")
+    fullyConnectedLayer(encodedDim,"Name","dense")
 
     % Decoder
-    fullyConnectedLayer(numElements,"Name","Dec_FC")
+    fullyConnectedLayer(numElements,"Name","dense_1")
 
-    functionLayer(@(x)dlarray(reshape(x,maxDelay,nTx,2,[]),'SSCB'), ...
+    functionLayer(@(x)permute(stripdims(x),[3,2,1,4]),"Formattable",true, ...
+    "Acceleratable",true,"Name","Dec_Permute1")
+
+    functionLayer(@(x)dlarray(reshape(x,numChannels,nTx,maxDelay,[]),'CSSB'), ...
     "Formattable",true,"Acceleratable",true,"Name","Dec_Reshape")
+
+    functionLayer(@(x)permute(x,[2,1,3,4]), ...
+    "Formattable",true,"Acceleratable",true,"Name","Dec_Permute2")
     ]);
 
 residualLayers1 = [ ...
-    convolution2dLayer([3 3],8,"Padding","same","Name","Res_Conv_1_1")
-    batchNormalizationLayer("Epsilon",0.001,"MeanDecay",0.99,"VarianceDecay",0.99,"Name","BN_1_1")
-    leakyReluLayer(0.3,"Name","leakyRelu_1_1")
+    convolution2dLayer([3 3],8,"Padding","same","Name","conv2d_1")
+    batchNormalizationLayer("Epsilon",0.001,"MeanDecay",0.99,"VarianceDecay",0.99,"Name","batch_normalization_1")
+    leakyReluLayer(0.3,"Name","leaky_re_lu_1")
 
-    convolution2dLayer([3 3],16,"Padding","same","Name","Res_Conv_1_2")
-    batchNormalizationLayer("Epsilon",0.001,"MeanDecay",0.99,"VarianceDecay",0.99,"Name","BN_1_2")
-    leakyReluLayer(0.3,"Name","leakyRelu_1_2")
+    convolution2dLayer([3 3],16,"Padding","same","Name","conv2d_2")
+    batchNormalizationLayer("Epsilon",0.001,"MeanDecay",0.99,"VarianceDecay",0.99,"Name","batch_normalization_2")
+    leakyReluLayer(0.3,"Name","leaky_re_lu_2")
 
     convolution2dLayer([3 3],2,"Padding","same","Name","Res_Conv_1_3")
-    batchNormalizationLayer("Epsilon",0.001,"MeanDecay",0.99,"VarianceDecay",0.99,"Name","BN_1_3")
+    batchNormalizationLayer("Epsilon",0.001,"MeanDecay",0.99,"VarianceDecay",0.99,"Name","batch_normalization_3")
 
-    additionLayer(2,"Name","add_1")
+    additionLayer(2,"Name","add")
 
-    leakyReluLayer(0.3,"Name","leakyRelu_1_3")
+    leakyReluLayer(0.3,"Name","leaky_re_lu_3")
     ];
 
 autoencoderLGraph = addLayers(autoencoderLGraph,residualLayers1);
-autoencoderLGraph = connectLayers(autoencoderLGraph,"Dec_Reshape","Res_Conv_1_1");
-autoencoderLGraph = connectLayers(autoencoderLGraph,"Dec_Reshape","add_1/in2");
+autoencoderLGraph = connectLayers(autoencoderLGraph,"Dec_Permute2","conv2d_1");
+autoencoderLGraph = connectLayers(autoencoderLGraph,"Dec_Permute2","add/in2");
 
 residualLayers2 = [ ...
-    convolution2dLayer([3 3],8,"Padding","same","Name","Res_Conv_2_1")
-    batchNormalizationLayer("Epsilon",0.001,"MeanDecay",0.99,"VarianceDecay",0.99,"Name","BN_2_1")
-    leakyReluLayer(0.3,"Name","leakyRelu_2_1")
+    convolution2dLayer([3 3],8,"Padding","same","Name","conv2d_4")
+    batchNormalizationLayer("Epsilon",0.001,"MeanDecay",0.99,"VarianceDecay",0.99,"Name","batch_normalization_4")
+    leakyReluLayer(0.3,"Name","leaky_re_lu_4")
 
-    convolution2dLayer([3 3],16,"Padding","same","Name","Res_Conv_2_2")
-    batchNormalizationLayer("Epsilon",0.001,"MeanDecay",0.99,"VarianceDecay",0.99,"Name","BN_2_2")
-    leakyReluLayer(0.3,"Name","leakyRelu_2_2")
+    convolution2dLayer([3 3],16,"Padding","same","Name","conv2d_5")
+    batchNormalizationLayer("Epsilon",0.001,"MeanDecay",0.99,"VarianceDecay",0.99,"Name","batch_normalization_5")
+    leakyReluLayer(0.3,"Name","leaky_re_lu_5")
 
-    convolution2dLayer([3 3],2,"Padding","same","Name","Res_Conv_2_3")
-    batchNormalizationLayer("Epsilon",0.001,"MeanDecay",0.99,"VarianceDecay",0.99,"Name","BN_2_3")
+    convolution2dLayer([3 3],2,"Padding","same","Name","conv2d_6")
+    batchNormalizationLayer("Epsilon",0.001,"MeanDecay",0.99,"VarianceDecay",0.99,"Name","batch_normalization_6")
 
-    additionLayer(2,"Name","add_2")
+    additionLayer(2,"Name","add_1")
 
-    leakyReluLayer(0.3,"Name","leakyRelu_2_3")
+    leakyReluLayer(0.3,"Name","leaky_re_lu_6")
     ];
 
 autoencoderLGraph = addLayers(autoencoderLGraph,residualLayers2);
-autoencoderLGraph = connectLayers(autoencoderLGraph,"leakyRelu_1_3","Res_Conv_2_1");
-autoencoderLGraph = connectLayers(autoencoderLGraph,"leakyRelu_1_3","add_2/in2");
+autoencoderLGraph = connectLayers(autoencoderLGraph,"leaky_re_lu_3","conv2d_4");
+autoencoderLGraph = connectLayers(autoencoderLGraph,"leaky_re_lu_3","add_1/in2");
 
 
 autoencoderLGraph = addLayers(autoencoderLGraph, ...
-    [convolution2dLayer([3 3],2,"Padding","same","Name","Dec_Conv") ...
-    sigmoidLayer("Name","Dec_Sigmoid") ...
-    regressionLayer("Name","Dec_Output")]);
+    [convolution2dLayer([3 3],2,"Padding","same","Name","conv2d_7") ...
+    sigmoidLayer("Name","conv2d_7_sigmoid") ...
+    regressionLayer("Name","RegressionLayer_conv2d_7")]);
 
 autoencoderLGraph = ...
-    connectLayers(autoencoderLGraph,"leakyRelu_2_3","Dec_Conv");
+    connectLayers(autoencoderLGraph,"leaky_re_lu_6","conv2d_7");
 end

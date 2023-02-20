@@ -17,7 +17,7 @@ Python:
 - Tensorflow (>=2.5.3)
 
 MATLAB:
-- [MATLAB](https://www.mathworks.com/products/matlab.html) R2022b or later
+- [MATLAB](https://www.mathworks.com/products/matlab.html) R2022b
 - [Deep Learning Toolbox&trade;](https://www.mathworks.com/products/deep-learning.html)
 
 ## Reproduction steps
@@ -39,7 +39,7 @@ MATLAB:
 - Use "CsiNet_train.mlx"(or "CsiNet_trainCode.m") to re-train the models yourself.
 - Use the Network Analyzer App in MATLAB to analyze and view the network structure as shown below.
 
-![](images/CSINet.JPG)
+<img src="images/CSINet.JPG" width=75% height=75%>
 
 
 ### 2. Training & testing data
@@ -73,8 +73,10 @@ Chao-Kai Wen, Wan-Ting Shih, and Shi Jin, “Deep learning for massive MIMO CSI 
 
 The following plots show the real and imaginary components of the channel matrix at the input and output of CSINet trained on the indoor environment dataset at gamma = 1/4.
 The test samples with the highest and lowest rho are plotted in the first and second plot, respectively.
-![](images/BestOutput.JPG)
-![](images/WorstOutput.JPG)
+
+<img src="images/BestOutput.JPG" width=75% height=75%>
+<img src="images/WorstOutput.JPG" width=75% height=75%>
+
 
 ## Remarks
 1. The training schedule is tuned for different compression rates and channel environments. All the models are trained for a maximum of 1500 epochs with a minibatch size of 500, at the end of the training process, the weights corresponding to the minimum validation loss is returned and saved. The following table provides the learning rate schedule parameters used to train the saved models:

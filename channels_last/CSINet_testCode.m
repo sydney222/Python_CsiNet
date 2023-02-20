@@ -88,7 +88,7 @@ imagesc(xHat(:,:,2,idxMax)-0.5)
 title("Imaginary channel at CSINet output")
 
 %% Plot the channel matrix before and after compression for the min value of rho
-figure(2)
+figure
 subplot(2,2,1)
 surf(xTest(:,:,1,idxMin))
 hold on
