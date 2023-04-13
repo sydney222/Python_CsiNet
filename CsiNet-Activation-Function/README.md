@@ -1,7 +1,7 @@
 # CsiNet-Activation-Function
 
 ## Motivation
-Since the user must convert the code word into a bit, it can be sent back to the base station. So for the convenience of coding. A Sigmoid activation function will be added after the Encoder's full-connected layer output to limit the Encoder's output between 0 and 1. But I found that the training effect will be poor, so I discuss the difference between the following two activation functions :
+Since the user must convert the codeword into binary, it can be sent back to the base station. So for the convenience of coding, a Sigmoid activation function will be added after the Encoder's full-connected layer output to limit the Encoder's output between 0 and 1. But I found that the training result will be bas, so I discuss the difference between the following two activation functions :
 
 1. Sigmoid：0 < codeword < 1
    
