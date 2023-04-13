@@ -1,7 +1,7 @@
 # CsiNet-Activation-Function
 
 ## Motivation
-Since the user must convert the codeword into binary, it can be sent back to the base station. So for the convenience of coding, a Sigmoid activation function will be added after the Encoder's fully-connected layer output to limit the Encoder's output between 0 and 1. However, the performance of using sigmoid as activation function is not good enough, so I discuss the difference between the following two activation functions :
+Since the user must convert the codeword into binary, it can be sent back to the base station. So for the convenience of coding, a Sigmoid activation function will be added after the Encoder's fully-connected layer output to limit the Encoder's output between 0 and 1. However, the performance of using sigmoid as activation function is not good enough, so I discussed the difference between sigmoid and tanh activation function at the following :
 
 1. Sigmoid：0 < codeword < 1
    
