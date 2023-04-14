@@ -35,4 +35,5 @@ From the above results, we can see that in most scenarios, using tanh for the ac
 
 ## Reference
 [1] Huang, Tzu-Hao. "5G downlink channel feedback technology based on deep learning"
+
 [2] MathWorks CSI Feedback with Autoencoders. https://www.mathworks.com/help/5g/ug/csi-feedback-with-autoencoders.html
