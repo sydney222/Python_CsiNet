@@ -32,3 +32,7 @@ The following are the simulation results of two different activation functions a
 <img src="Compare result/Outdoor_128_Quantized.jpg" width=50% height=50%>
 
 From the above results, we can see that in most scenarios, using tanh for the activation function can bring better results. I think that the corresponding domain of tanh is larger than that of sigmoid, which means that the gradient is also stronger.
+
+## Reference
+[1] Huang, Tzu-Hao. "5G downlink channel feedback technology based on deep learning"
+[2] MathWorks CSI Feedback with Autoencoders. https://www.mathworks.com/help/5g/ug/csi-feedback-with-autoencoders.html
