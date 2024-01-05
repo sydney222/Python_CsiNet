@@ -7,7 +7,7 @@ Since the user must convert the codeword into binary, it can be sent back to the
    
    Binary codeword = Quantized(codeword*2-1)
 
-2. tanh：- 1 < codeword < 1
+2. tanh：-1 < codeword < 1
    
    Binary codeword = Quantized(codeword)
 
@@ -34,6 +34,6 @@ The following are the simulation results of two different activation functions a
 From the above results, we can see that in most scenarios, using tanh for the activation function can bring better results. I think that the corresponding domain of tanh is larger than that of sigmoid, which means that the gradient is also stronger.
 
 ## Reference
-[1] Huang, Tzu-Hao. "5G downlink channel feedback technology based on deep learning"
+[1] T.-H. Huang, "5G downlink channel feedback technology based on deep learning," M.S. thesis, Comm. Eng., National Sun Yat-sen Univ., Kaohsiung, Taiwan, 2023.
 
 [2] MathWorks CSI Feedback with Autoencoders. https://www.mathworks.com/help/5g/ug/csi-feedback-with-autoencoders.html
